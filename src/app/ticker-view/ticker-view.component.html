@@ -1,0 +1,12 @@
+<button class="btn btn-primary" (click)="connect()" [disabled]="conn2.readyState === 1">
+  connect
+</button>
+
+<button class="btn btn-primary" (click)="close()"  [disabled]="conn2.readyState != 1">
+  disconnect
+</button>
+
+Status : {{conn2.readyState}}
+
+<app-coin *ngFor="let coin of coins" [coin]="coin">
+</app-coin>
