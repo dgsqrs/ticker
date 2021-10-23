@@ -1,12 +1,22 @@
-<button class="btn btn-primary" (click)="connect()" [disabled]="conn2.readyState === 1">
-  connect
-</button>
+<!-- Highlight Card -->
+<div class="card highlight-card card-small">
 
-<button class="btn btn-primary" (click)="close()"  [disabled]="conn2.readyState != 1">
-  disconnect
-</button>
+  <button class="btn btn-primary" (click)="connect()" [disabled]="conn2.readyState === 1">
+    connect
+  </button>
 
-Status : {{conn2.readyState}}
+  <button class="btn btn-primary" (click)="close()"  [disabled]="conn2.readyState != 1">
+    disconnect
+  </button>
 
-<app-coin *ngFor="let coin of coins" [coin]="coin">
+  Status : {{conn2.readyState}} ({{now |date: 'dd.MM.yyyy HH:mm:ss'}})
+
+</div>
+
+<div class="card highlight-card card-small">
+  <input type="text" [(ngModel)]="newCoin" #newCoinInput>
+  <button class="btn btn-primary" (click)="addNewCoin(newCoinInput.value)"><em class="fa fa-plus"></em></button>
+</div>
+
+<app-coin *ngFor="let coin of coins" [coin]="coin" (remove)="remove(coin)">
 </app-coin>

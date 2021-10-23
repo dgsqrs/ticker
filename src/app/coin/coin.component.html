@@ -1,16 +1,22 @@
 <div class="card" style="width: 18rem;" *ngIf="coin?.s">
   <div class="card-body">
     <h5 class="card-title">{{coin?.s}} ({{coin?.k.i}})</h5>
+    <button class="btn" (click)="removeCoin(coin)"><em class="fa fa-minus"></em></button>
     <p class="card-text">
+
+      <div class="larger" [ngClass]="up ? 'green' : 'red' ">
+        <em class="fa" [ngClass]="up ? 'fa-caret-up' : 'fa-caret-down'"></em>
+          {{coin?.k.c}}
+  </div>
+
 
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Open : {{coin?.k.o}}</li>
-      <li class="list-group-item">
-        <span class="larger">Close : {{coin?.k.c}}</span></li>
+
       <li class="list-group-item">High : {{coin?.k.h}}</li>
       <li class="list-group-item">Low : {{coin?.k.l}}</li>
-      <li class="list-group-item">Start : {{coin?.k.t | date: 'medium'}}</li>
-      <li class="list-group-item">End : {{coin?.k.T | date: 'medium'}}</li>
+      <li class="list-group-item">Start : {{coin?.k.t | date: 'HH:mm:ss'}}</li>
+      <li class="list-group-item">End : {{coin?.k.T | date: 'HH:mm:ss'}}</li>
     </ul>
   </div>
 </div>
