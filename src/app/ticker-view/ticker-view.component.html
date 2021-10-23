@@ -1,22 +1,38 @@
 <!-- Highlight Card -->
+<div class="row">
+
+
+  <footer>
+    Status : {{conn2.readyState}} ({{now |date: 'dd.MM.yyyy HH:mm:ss'}})
+
+  </footer>
+
 <div class="card highlight-card card-small">
 
-  <button class="btn btn-primary" (click)="connect()" [disabled]="conn2.readyState === 1">
-    connect
-  </button>
+  <div class="btn-group">
+    <button class="btn btn-primary" (click)="connect()" [disabled]="conn2.readyState === 1">
+      <em class="fa fa-link"></em>
+    </button>
 
-  <button class="btn btn-primary" (click)="close()"  [disabled]="conn2.readyState != 1">
-    disconnect
-  </button>
+    <button class="btn btn-primary" (click)="close()"  [disabled]="conn2.readyState != 1">
+      <em class="fa fa-unlink"></em>
+    </button>
 
-  Status : {{conn2.readyState}} ({{now |date: 'dd.MM.yyyy HH:mm:ss'}})
+    <div class="card highlight-card card-small">
+      <input type="text" [(ngModel)]="newCoin" #newCoinInput>
+      <button class="btn btn-primary btn-sm" (click)="addNewCoin(newCoinInput.value)"><em class="fa fa-plus"></em></button>
+    </div>
+  </div>
 
 </div>
 
-<div class="card highlight-card card-small">
-  <input type="text" [(ngModel)]="newCoin" #newCoinInput>
-  <button class="btn btn-primary" (click)="addNewCoin(newCoinInput.value)"><em class="fa fa-plus"></em></button>
+
+
+  <div class="card-group">
+  <app-coin *ngFor="let coin of coins" [coin]="coin" (remove)="remove(coin)">
+    </app-coin>
+  </div>
+
+
 </div>
 
-<app-coin *ngFor="let coin of coins" [coin]="coin" (remove)="remove(coin)">
-</app-coin>
