@@ -4,7 +4,7 @@
     <button class="btn" (click)="removeCoin(coin)"><em class="fa fa-minus"></em></button>
     <p class="card-text">
 
-      <div class="larger" [ngClass]="up ? 'green' : 'red' ">
+      <div [@divstate] class="larger" [ngClass]="up ? 'green' : 'red' ">
         <em class="fa" [ngClass]="up ? 'fa-caret-up' : 'fa-caret-down'"></em>
           {{coin?.k.c}}
   </div>

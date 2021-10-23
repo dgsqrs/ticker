@@ -1,9 +1,24 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-coin',
   templateUrl: './coin.component.html',
-  styleUrls: ['./coin.component.css']
+  styleUrls: ['./coin.component.css'],
+  animations: [
+    trigger('divstate', [
+      state('in', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-10px)'
+        }),
+        animate(200)
+      ]),
+    ])]
 })
 export class CoinComponent implements OnChanges {
 
