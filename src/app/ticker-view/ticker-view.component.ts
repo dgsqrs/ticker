@@ -10,12 +10,10 @@ export class TickerViewComponent implements OnInit, OnDestroy {
   newCoin: string = '';
 
   data: any;
-  msg: any;
-
   conn2: any;
 
   coins : any[] = [];
-  wantedCoins = ['btcusdt@kline_1m','ethusdt@kline_1d'];
+  wantedCoins = ['btcusdt@kline_1m'];
 
   public now: Date = new Date();
 
@@ -23,19 +21,18 @@ export class TickerViewComponent implements OnInit, OnDestroy {
     setInterval(() => {
       this.now = new Date();
     }, 1);
+
+    const localCoins = localStorage.getItem('coins');
+    if (localCoins){
+      this.wantedCoins = JSON.parse(localCoins);
+    }
   }
 
   ngOnInit(): void {
 
-    const localCoints = localStorage.getItem('coins');
-    if (localCoints){
-      this.wantedCoins = JSON.parse(localCoints);
-    }
-
     const conn = new WebSocket("wss://stream.binance.com:9443/ws");
-    const that = this;
-
     this.conn2 = conn;
+    const that = this;
 
     conn.onopen = function(evt: any) {
       conn.send(JSON.stringify({ method: "SUBSCRIBE", id: 1, params: that.wantedCoins }));
@@ -52,16 +49,29 @@ export class TickerViewComponent implements OnInit, OnDestroy {
     conn.onmessage = function(msg: any) {
       const data = JSON.parse(msg.data);
 
-      const found = that.coins.filter(coin => coin.s === data.s);
-      if (found.length == 1) {
-        that.coins[that.coins.indexOf(found[0])] = data;
+      const found:any = that.coins.filter(coin => coin.s?.toLowerCase() == data.s?.toLowerCase());
+      if (found.length > 0) {
+        const the = found[0];
+        // Replace element
+        //that.coins[that.coins.indexOf(the)] = data;
+        the.k.c = data.k.c;
+        the.k.h = data.k.h;
+        the.k.l = data.k.l;
+        the.k.o = data.k.o;
+        the.k.t = data.k.t;
+        the.k.T = data.k.T;
+        if (!the.trigger) {
+          the.trigger = 1;
+        }
+        else {
+          the.trigger++;
+        }
+        that.coins = that.coins.slice();
       }
       else {
+        console.log("new coin pushed")
         that.coins.push(data);
       }
-
-      that.msg = msg;
-      //console.log("data", data)
     }
   }
 

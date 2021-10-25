@@ -7,7 +7,7 @@
 
   </footer>
 
-<div class="card highlight-card card-small">
+<div class="card highlight-card">
 
   <div class="btn-group">
     <button class="btn btn-primary" (click)="connect()" [disabled]="conn2.readyState === 1">
@@ -18,7 +18,7 @@
       <em class="fa fa-unlink"></em>
     </button>
 
-    <div class="card highlight-card card-small">
+    <div class="card highlight-card">
       <input type="text" [(ngModel)]="newCoin" #newCoinInput>
       <button class="btn btn-primary btn-sm" (click)="addNewCoin(newCoinInput.value)"><em class="fa fa-plus"></em></button>
     </div>
@@ -29,8 +29,8 @@
 
 
   <div class="card-group">
-  <app-coin *ngFor="let coin of coins" [coin]="coin" (remove)="remove(coin)">
-    </app-coin>
+      <app-coin style="width: 1000px" *ngFor="let coin of coins" [coin]="coin" (remove)="remove(coin)">
+      </app-coin>
   </div>
 
 

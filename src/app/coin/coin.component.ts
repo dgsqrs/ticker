@@ -30,7 +30,9 @@ export class CoinComponent implements OnChanges {
 
   up = true;
 
-  constructor() { }
+  constructor() {
+    console.log('coin component constructor')
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const coin: any = changes.coin.currentValue;

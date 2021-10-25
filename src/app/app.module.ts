@@ -7,17 +7,21 @@ import {TickerViewComponent} from './ticker-view/ticker-view.component';
 import {CoinComponent} from './coin/coin.component';
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgApexchartsModule} from "ng-apexcharts";
+import {CandlestickComponent} from './candlestick/candlestick.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TickerViewComponent,
-    CoinComponent
+    CoinComponent,
+    CandlestickComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    NgApexchartsModule,
     AppRoutingModule
   ],
   providers: [],

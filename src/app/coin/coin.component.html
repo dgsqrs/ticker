@@ -1,4 +1,4 @@
-<div class="card" style="width: 18rem;" *ngIf="coin?.s">
+<div class="card"  *ngIf="coin?.s">
   <div class="card-body">
     <h5 class="card-title">{{coin?.s}} ({{coin?.k.i}})</h5>
     <button class="btn" (click)="removeCoin(coin)"><em class="fa fa-minus"></em></button>
@@ -6,8 +6,11 @@
 
       <div [@divstate] class="larger" [ngClass]="up ? 'green' : 'red' ">
         <em class="fa" [ngClass]="up ? 'fa-caret-up' : 'fa-caret-down'"></em>
-          {{coin?.k.c}}
+          {{(+coin?.k.c).toFixed(2)}} ({{(((coin?.k.c / coin?.k.o ) * 100) - 100).toFixed(2)}}%)
   </div>
+
+    <app-candlestick [coin]="coin"></app-candlestick>
+
 
 
     <ul class="list-group list-group-flush">
